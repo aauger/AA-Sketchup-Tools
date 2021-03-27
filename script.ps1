@@ -1,1 +1,0 @@
-Copy-Item "*" -Destination "C:\Users\Austin\AppData\Roaming\SketchUp\SketchUp 2020\SketchUp\Plugins" -Recurse -Force
