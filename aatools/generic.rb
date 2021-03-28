@@ -2,12 +2,22 @@ module AATools
   module Generic
     @@images_path = nil
 
-    def self.selection_edges()
+    def self.selection_entities()
       Sketchup.active_model.selection.to_a
     end
 
     def self.selection_vertices()
-      selection_edges.flat_map{|e| e.vertices}
+      selection_entities.select{|e| (e.is_a? Sketchup::Face) or (e.is_a? Sketchup::Edge)}.flat_map{|e| e.vertices}
+    end
+
+    def self.create_command(name, icon_filename, tooltip="")
+      cmd = UI::Command.new(name) {
+        yield
+      }
+      cmd.small_icon = File.join(Generic.path_images, icon_filename)
+      cmd.large_icon = File.join(Generic.path_images, icon_filename)
+      cmd.tooltip = tooltip
+      cmd 
     end
 
     def self.path_images

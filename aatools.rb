@@ -13,9 +13,8 @@ module AATools
     Sketchup.register_extension(ex, true)
     file_loaded(__FILE__)
     toolbar = UI::Toolbar.new("AATools")
-    toolbar = AATools::Nudger.init(toolbar)
-    toolbar = AATools::Multipusher.init(toolbar)
-    toolbar = AATools::Flatflip.init(toolbar)
+    modules = [Nudger, Multipusher, Flatflip, Dims]
+    toolbar = modules.reduce(toolbar) {|tb,m| m.init(tb)}
     toolbar.show
   end
 end

@@ -25,13 +25,8 @@ module AATools
       menu.add_item('AATools Nudger') {
         self.nudge()
       }
-      cmd = UI::Command.new('Nudge') {
-        self.nudge()
-      }
-      cmd.small_icon = File.join(Generic.path_images, 'nudge24.png')
-      cmd.large_icon = File.join(Generic.path_images, 'nudge24.png')
-      cmd.tooltip = "Nudge vertices on faces or edges"
-      toolbar.add_item cmd
+      toolbar.add_item(
+        Generic.create_command('Nudge', 'nudge24.png', 'Nudge vertices on faces or edges') { self.nudge })
     end
   end
 end

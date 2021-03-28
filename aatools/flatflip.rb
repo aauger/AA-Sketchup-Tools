@@ -11,18 +11,6 @@ module AATools
       ae.transform_entities(Geom::Transformation.scaling(fvp, xsc, ysc, zsc), as)
     end
 
-    def self.flat_flip_x()
-      flat_flip(-1.00, 1.00, 1.00)
-    end
-
-    def self.flat_flip_y()
-      flat_flip(1.00, -1.00, 1.00)
-    end
-
-    def self.flat_flip_z()
-      flat_flip(1.00, 1.00, -1.00)
-    end
-
     def self.init(toolbar)
       menu = UI.menu('Plugins')
       submenu = menu.add_submenu('AATools Flatflip')
@@ -35,29 +23,21 @@ module AATools
       submenu.add_item('Flip Z') {
         self.flat_flip_z
       }
-      l_toolbar = toolbar
-      cmd = UI::Command.new('Flatflip X') {
-        self.flat_flip_x()
-      }
-      cmd.small_icon = File.join(Generic.path_images, 'flatflipx24.png')
-      cmd.large_icon = File.join(Generic.path_images, 'flatflipx24.png')
-      l_toolbar = l_toolbar.add_item cmd
-
-      cmd = UI::Command.new('Flatflip Y') {
-        self.flat_flip_y()
-      }
-      cmd.small_icon = File.join(Generic.path_images, 'flatflipy24.png')
-      cmd.large_icon = File.join(Generic.path_images, 'flatflipy24.png')
-
-      l_toolbar = l_toolbar.add_item cmd
-
-      cmd = UI::Command.new('Flatflip Z') {
-        self.flat_flip_z()
-      }
-      cmd.small_icon = File.join(Generic.path_images, 'flatflipz24.png')
-      cmd.large_icon = File.join(Generic.path_images, 'flatflipz24.png')
-      l_toolbar = l_toolbar.add_item cmd
-      l_toolbar
+      commands = [
+        Generic
+          .create_command('Flatflip X', 
+            'flatflipx24.png', 
+            'Flip vertices across first vertex X axis') { self.flat_flip(-1.00, 1.00, 1.00) },
+        Generic
+          .create_command('Flatflip Y', 
+            'flatflipy24.png', 
+            'Flip vertices across first vertex Y axis') { self.flat_flip(1.00, -1.00, 1.00) },
+        Generic
+          .create_command('Flatflip Z', 
+            'flatflipZ24.png', 
+            'Flip vertices across first vertex Z axis') { self.flat_flip(1.00, 1.00, -1.00) },
+      ]
+      commands.reduce(toolbar) { |tb,c| tb.add_item c }
     end
   end
 end

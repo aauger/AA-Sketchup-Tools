@@ -23,13 +23,8 @@ module AATools
       menu.add_item('AATools Multipush') {
         self.multi_push
       }
-      cmd = UI::Command.new('Multipush') {
-        self.multi_push()
-      }
-      cmd.small_icon = File.join(Generic.path_images, 'multipush24.png')
-      cmd.large_icon = File.join(Generic.path_images, 'multipush24.png')
-      cmd.tooltip = "Push multiple faces"
-      toolbar.add_item cmd
+      toolbar.add_item(
+        Generic.create_command('Multipush', 'multipush24.png', 'Push multiple faces') { self.multi_push })
     end
   end
 end
