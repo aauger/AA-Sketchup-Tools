@@ -8,7 +8,7 @@ module AATools
 			st_result = "The selection was not a valid edge"
 			if selection.is_a?(Sketchup::Edge)
 				length = selection.length
-				st_result = "Feet & Inches: %s\nCentimeters: %s" % [length.to_s, length.to_cm.to_s]
+				st_result = "Feet & Inches: %s\nInches: %s\"\nCentimeters: %scm" % [length.to_s, length.to_inch.to_s, length.to_cm.to_s]
 			end
 			UI.messagebox(st_result, MB_MULTILINE)
 		end
