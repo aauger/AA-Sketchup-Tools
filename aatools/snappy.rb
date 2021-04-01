@@ -8,7 +8,7 @@ module AATools
 			n_value = !model_options["LengthSnapEnabled"]
 			model_options["LengthSnapEnabled"] = n_value
 			model_options["AngleSnapEnabled"] = n_value
-			(UI::Notification.new(Generic.extension, 'Snapping: %s' % [n_value.to_s])).show
+			(UI::Notification.new(AATools.extension, 'Snapping: %s' % [n_value.to_s])).show
 		end
 
 		def self.init(toolbar)

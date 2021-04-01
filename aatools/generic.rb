@@ -1,7 +1,6 @@
 module AATools
   module Generic
     @@images_path = nil
-    @@this_extension =
 
     def self.selection_entities()
       Sketchup.active_model.selection.to_a
@@ -19,14 +18,6 @@ module AATools
       cmd.large_icon = File.join(Generic.path_images, icon_filename)
       cmd.tooltip = tooltip
       cmd 
-    end
-
-    def self.set_extension(ext)
-      @@this_extension = ext
-    end
-
-    def self.extension()
-      @@this_extension
     end
 
     def self.path_images

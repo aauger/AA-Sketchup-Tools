@@ -5,6 +5,7 @@ require 'extensions.rb'
 require 'aatools/generic.rb'
 
 module AATools
+
   unless file_loaded?(__FILE__)
     ex = SketchupExtension.new('AATools', 'aatools/main')
     ex.description = 'Sketchup tools'
@@ -22,6 +23,10 @@ module AATools
          Snappy]
     toolbar = modules.reduce(toolbar) {|tb,m| m.init(tb)}
     toolbar.show
-    AATools::Generic.set_extension(ex)
+    @@extension = ex
+  end
+
+  def self.extension
+    @@extension
   end
 end
