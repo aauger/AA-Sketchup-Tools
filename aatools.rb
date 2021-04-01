@@ -2,6 +2,7 @@
 
 require 'sketchup.rb'
 require 'extensions.rb'
+require 'aatools/generic.rb'
 
 module AATools
   unless file_loaded?(__FILE__)
@@ -13,8 +14,14 @@ module AATools
     Sketchup.register_extension(ex, true)
     file_loaded(__FILE__)
     toolbar = UI::Toolbar.new("AATools")
-    modules = [Nudger, Multipusher, Flatflip, Dims]
+    modules = 
+        [Nudger, 
+         Multipusher, 
+         Flatflip,
+         Dims, 
+         Snappy]
     toolbar = modules.reduce(toolbar) {|tb,m| m.init(tb)}
     toolbar.show
+    AATools::Generic.set_extension(ex)
   end
 end
